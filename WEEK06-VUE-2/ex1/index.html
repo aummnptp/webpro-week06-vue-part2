@@ -238,7 +238,8 @@
                     <div class="columns">
                         <div class="column">
                             <p class="control has-icons-left">
-                                <input class="input" type="text" placeholder="Name Search by Watchers"v-model="search1">
+                                <input class="input" type="text" placeholder="Name Search by Watchers"
+                                    v-model="search1">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-search"></i>
                                 </span>
@@ -274,7 +275,7 @@
                 <b>ข้อ 7</b>
                 <p>ให้ใช้ <b>Computed</b> สำหรับการค้นหา <b>Gender</b> จากการเลือกตัวเลือกใน drop down list
                     แล้วแสดงผลข้อมูลตามที่ค้นหามาได้</p>
-                <div style="display: flex; justify-content: flex-end;" class="my-2"@click="">
+                <div style="display: flex; justify-content: flex-end;" class="my-2" @click="">
                     <div class="control has-icons-left">
                         <div class="select">
                             <select v-model="search2">
@@ -331,8 +332,8 @@
                 students: [],
                 logs: [],
                 dummyData: dummyData,
-                search1:'',
-                search2:''
+                search1: '',
+                search2: ''
 
 
 
@@ -342,16 +343,23 @@
                     if (this.prename === '' || this.fname === '' || this.lname === '' || this.score === '') {
                         alert("Please enter all inputs");
                     }
+                    
                     else if (this.score < 0 || this.score > 100) {
                         alert("Score is incorrect")
                     }
+
                     else {
                         this.students.push({ prename, fname, lname, score })
-                        
 
                     }
+                    this.prename = '';
+                    this.fname = '';
+                    this.lname = '';
+                    this.score = '';
 
-                },
+                }
+
+                ,
                 removeStudent(index) {
                     this.students.splice(index, 1);
 
@@ -371,15 +379,15 @@
                         return this.sumScore / this.students.length;
                     }
                 },
-                filteredList(){
-                     return this.dummyData.filter(answer =>answer.gender.includes(this.search2))
+                filteredList() {
+                    return this.dummyData.filter(answer => answer.gender.includes(this.search2))
                 }
             },
             watch: {
                 avarageScore: function (newVal, oldVal) {
                     if (newVal - oldVal >= 0) {
                         colorVal = 'green'
-                        diffVal = '+'+(newVal - oldVal);
+                        diffVal = '+' + (newVal - oldVal);
                     }
                     else {
                         colorVal = 'red'
@@ -388,11 +396,11 @@
                     this.logs.push({ newVal, oldVal, diffVal, colorVal });
                     console.log(this.logs);
                 },
-                search1: function(){
+                search1: function () {
                     this.dummyData = dummyData.filter(val => val.first_name.includes(this.search1)
-                    ||val.last_name.includes(this.search1));
+                        || val.last_name.includes(this.search1));
                 }
-            }   
+            }
 
         })
     </script>
